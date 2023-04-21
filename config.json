@@ -1,0 +1,27 @@
+{
+  "D2": {
+    "description": "none",
+    "duration": "1",
+    "mode":"OUTPUT"
+  },
+  "D3": {
+    "description": "none",
+    "duration": "1",
+    "mode":"OUTPUT"
+  },
+  "D4": {
+    "description": "none",
+    "duration": "1",
+    "mode":"OUTPUT"
+  },
+  "D5": {
+    "description": "none",
+    "duration": "1",
+    "mode":"OUTPUT"
+  },
+  "D6": {
+    "description": "Pin 6",
+    "duration": "1",
+    "mode":"OUTPUT"
+  }
+}
