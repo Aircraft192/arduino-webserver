@@ -2,7 +2,7 @@
   "D2": {
     "description": "none",
     "duration": "1",
-    "mode":"OUTPUT"
+    "mode":"INPUT"
   },
   "D3": {
     "description": "none",
