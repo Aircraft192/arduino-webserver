@@ -13,10 +13,8 @@ $statuses = array_keys($data_config);
 
 foreach ($statuses as $var) {
     if (isset($_GET[$var]) && $_GET[$var] >= 0) {
-        // Die Variable existiert und hat einen numerischen Wert
         $$var = $_GET[$var]; // Dynamische Variable erstellen
     } else {
-        // Die Variable existiert nicht oder hat keinen numerischen Wert
         if (isset($data_data['status'][$var])) {
             $$var = $data_data['status'][$var]; // Eine Standard-Nummer als Wert setzen
         }

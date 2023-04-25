@@ -10,7 +10,6 @@ $data_config = json_decode($json_config,true);
 
 $targets = array();
 $targets = array_keys($data_config);
-//print_r($targets);
 
 foreach ($targets as $var) {
     if (isset($_GET[$var]) && $_GET[$var] >= -1 && $_GET[$var] <= 10) {

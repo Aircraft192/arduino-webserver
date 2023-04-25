@@ -39,7 +39,7 @@ function load(){
             document.getElementById("target_d" + i).style.color = "red";
             document.getElementById("switch_d" + i).value = "Einschalten";
         }
-        if(json_data.target['D' + i] > 0 || json_data.target['D' + i] == "undefined"){
+        if(json_data.target['D' + i] != 0){
             document.getElementById("table_cell_press_d" + i).innerHTML = "nicht verfügbar.";
             document.getElementById("table_cell_press_d" + i).style.fontStyle = "italic";
             document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
