@@ -14,7 +14,7 @@ fetch(config_url).then(response => response.json()).then(data => {
 
 function load(){
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
-        document.getElementById("table").innerHTML = document.getElementById("table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td><form onsubmit=\"press('D" + i + "')\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";
+        document.getElementById("table").innerHTML = document.getElementById("table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "')\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";
     }
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
         document.getElementById("description_d" + i).innerHTML = json_config['D' + i].description;
@@ -38,6 +38,11 @@ function load(){
             document.getElementById("target_d" + i).innerHTML = "Ausgeschaltet";
             document.getElementById("target_d" + i).style.color = "red";
             document.getElementById("switch_d" + i).value = "Einschalten";
+        }
+        if(json_data.target['D' + i] > 0 || json_data.target['D' + i] == "undefined"){
+            document.getElementById("table_cell_press_d" + i).innerHTML = "nicht verfügbar.";
+            document.getElementById("table_cell_press_d" + i).style.fontStyle = "italic";
+            document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
         }
     }
     for (let i = 0; i < document.getElementsByTagName("form").length; i++) {
