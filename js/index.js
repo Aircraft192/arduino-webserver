@@ -14,35 +14,48 @@ fetch(config_url).then(response => response.json()).then(data => {
 
 function load(){
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
-        document.getElementById("table").innerHTML = document.getElementById("table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "')\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";
+        if(json_config['D' + i].mode == "OUTPUT"){
+            document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "')\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
+        }
+        else if(json_config['D' + i].mode == "INPUT"){
+            document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td>"
+        }
+        else{
+            console.error("Error parsing mode at [D" + i + "]. Is the config file correct?");
+        }
     }
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
         document.getElementById("description_d" + i).innerHTML = json_config['D' + i].description;
         document.getElementById("mode_d" + i).innerHTML = json_config['D' + i].mode;
-        document.getElementById("button_duration_d" + i).value = json_config['D' + i].duration;
-        if(json_data.target['D' + i] == -1){
-            document.getElementById("duration_d" + i).innerHTML = "∞";
+        if(json_config['D' + i].mode == "OUTPUT"){
+            document.getElementById("button_duration_d" + i).value = json_config['D' + i].duration;
+            if(json_data.target['D' + i] == -1){
+                document.getElementById("duration_d" + i).innerHTML = "∞";
+            }
+            else if(json_data.target['D' + i] == 0){
+                document.getElementById("duration_d" + i).innerHTML = "-"
+            }
+            else{
+                document.getElementById("duration_d" + i).innerHTML = plural(json_data.target['D' + i], "Sekunde", "n");
+            }
+            if(json_data.target['D' + i] != 0){
+                document.getElementById("target_d" + i).innerHTML = "Eingeschaltet";
+                document.getElementById("target_d" + i).style.color = "green";
+                document.getElementById("switch_d" + i).value = "Ausschalten";
+            }
+            else{
+                document.getElementById("target_d" + i).innerHTML = "Ausgeschaltet";
+                document.getElementById("target_d" + i).style.color = "red";
+                document.getElementById("switch_d" + i).value = "Einschalten";
+            }
+            if(json_data.target['D' + i] != 0){
+                document.getElementById("table_cell_press_d" + i).innerHTML = "nicht verfügbar.";
+                document.getElementById("table_cell_press_d" + i).style.fontStyle = "italic";
+                document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
+            }
         }
-        else if(json_data.target['D' + i] == 0){
-            document.getElementById("duration_d" + i).innerHTML = "-"
-        }
-        else{
-            document.getElementById("duration_d" + i).innerHTML = plural(json_data.target['D' + i], "Sekunde", "n");
-        }
-        if(json_data.target['D' + i] != 0){
-            document.getElementById("target_d" + i).innerHTML = "Eingeschaltet";
-            document.getElementById("target_d" + i).style.color = "green";
-            document.getElementById("switch_d" + i).value = "Ausschalten";
-        }
-        else{
-            document.getElementById("target_d" + i).innerHTML = "Ausgeschaltet";
-            document.getElementById("target_d" + i).style.color = "red";
-            document.getElementById("switch_d" + i).value = "Einschalten";
-        }
-        if(json_data.target['D' + i] != 0){
-            document.getElementById("table_cell_press_d" + i).innerHTML = "nicht verfügbar.";
-            document.getElementById("table_cell_press_d" + i).style.fontStyle = "italic";
-            document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
+        else if(json_config['D' + i].mode == "INPUT"){
+            document.getElementById("target_d" + i).innerHTML = json_data.status['D' + i];
         }
     }
     for (let i = 0; i < document.getElementsByTagName("form").length; i++) {
