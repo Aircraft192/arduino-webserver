@@ -17,6 +17,7 @@
 # CONFIG ##############################
 $data_json_file_path = "data.json";
 $config_json_file_path = "config.json";
+$modes_json_file_path = "modes.json";
 #######################################
 
 echo "Initialising Files...";
@@ -24,24 +25,36 @@ $json_data = file_get_contents($data_json_file_path);
 $data_data = json_decode($json_data, true);
 $json_config = file_get_contents($config_json_file_path);
 $data_config = json_decode($json_config,true);
+$json_modes = file_get_contents($modes_json_file_path);
+$data_modes = json_decode($json_modes,true);
 
 $targets = array_keys($data_config);
 $statuses = array_keys($data_config);
 $error_count = 0;
 echo "ok\n";
+echo "Checking modes.json...\n";
+if (count($data_config) == count($data_modes)) {
+    echo "<good>Length of modes.json matches length of config.json</good>\n";
+} else {
+    echo "<error>Legth of modes.json doesn't match length of config.json. Please check the files.</error>\n";
+    $error_count++;
+}
+echo "Checking modes.json... done!\n";
 echo "Checking modes...\n";
-for ($i=2; $i < count($data_config) + 1; $i++) {
-    if ($data_config['D'.$i]['mode'] == "OUTPUT" || $data_config['D'.$i]['mode'] == "INPUT") {
-        echo "<good>Mode at D".$i." ok.</good>\n";
+for ($i=2; $i < count($data_config) + 2; $i++) {
+    if ($data_modes['D'.$i] == "0" || $data_modes['D'.$i] == "1") {
+        echo "<good>Mode at D".$i." ok. (";
+        echo $data_modes['D'.$i];
+        echo ")</good>\n";
     }
     else {
-        echo "<error>Error reading mode at D".$i.". Please check the config file. The value must be 'INPUT' or 'OUTPUT'.</error>\n";
+        echo "<error>Error reading mode at D".$i.". Please check the config file. The value must be '0' (OUTPUT) or '1' (INPUT).</error>\n";
         $error_count++;
     }
 }
 echo "Checking modes... done!\n";
 echo "Checking durations...\n";
-for ($i=2; $i < count($data_config) + 1; $i++) {
+for ($i=2; $i < count($data_config) + 2; $i++) {
     if ($data_config['D'.$i]['duration'] > 0 && $data_config['D'.$i]['duration'] <= 10) {
         echo "<good>Duration at D".$i." ok.</good>\n";
     }

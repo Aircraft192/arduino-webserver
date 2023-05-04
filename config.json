@@ -1,13 +1,11 @@
 {
   "D2": {
     "description": "none",
-    "duration": "1",
-    "mode":"INPUT"
+    "duration": "1"
   },
   "D3": {
     "description": "none",
-    "duration": "1",
-    "mode":"OUTPUT"
+    "duration": "1"
   },
   "D4": {
     "description": "none",
@@ -16,12 +14,10 @@
   },
   "D5": {
     "description": "none",
-    "duration": "1",
-    "mode":"OUTPUT"
+    "duration": "1"
   },
   "D6": {
     "description": "Pin 6",
-    "duration": "1",
-    "mode":"OUTPUT"
+    "duration": "1"
   }
 }
