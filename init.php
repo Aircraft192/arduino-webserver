@@ -10,9 +10,9 @@
     <body>
 <pre>
 <?php
-#ini_set('display_errors', 1);
-#ini_set('display_startup_errors', 1);
-#error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 # CONFIG ##############################
 $data_json_file_path = "data.json";
@@ -28,15 +28,23 @@ $data_config = json_decode($json_config,true);
 $json_modes = file_get_contents($modes_json_file_path);
 $data_modes = json_decode($json_modes,true);
 
-$targets = array_keys($data_config);
-$statuses = array_keys($data_config);
+$keys = array_keys($data_config);
 $error_count = 0;
+
 echo "ok\n";
+echo "Creating modes.json...\n\n";
+foreach ($keys as $var) {
+    $mode[$var] = $data_config[$var]['mode'];
+}
+$modes_json_encoded = json_encode($mode);
+file_put_contents($modes_json_file_path, $modes_json_encoded);
+echo $modes_json_encoded;
+echo "\n\nCreating modes.json... done!\n";
 echo "Checking modes.json...\n";
 if (count($data_config) == count($data_modes)) {
     echo "<good>Length of modes.json matches length of config.json</good>\n";
 } else {
-    echo "<error>Legth of modes.json doesn't match length of config.json. Please check the files.</error>\n";
+    echo "<error>Length of modes.json doesn't match length of config.json. Please check the files. (".count($data_config)." != ".count($data_modes).")</error>\n";
     $error_count++;
 }
 echo "Checking modes.json... done!\n";
@@ -65,14 +73,14 @@ for ($i=2; $i < count($data_config) + 2; $i++) {
 }
 echo "Checking durations... done!\n";
 echo "Initialising data.json...";
-foreach ($targets as $var) {
+foreach ($keys as $var) {
     if (isset($data_data['target'][$var])) {
         $target[$var] = $data_data['target'][$var];
     }else{
         $target[$var] = '0';
     }
 }
-foreach($statuses as $var){
+foreach($keys as $var){
     if (isset($data_data['status'][$var])) {
         $status[$var] = $data_data['status'][$var];
     }else{
@@ -112,3 +120,5 @@ else {
 }
 ?>
 </pre>
+</body>
+</html>
