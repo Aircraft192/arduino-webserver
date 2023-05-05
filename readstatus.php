@@ -1,11 +1,17 @@
 <?php
+
+# CONFIG ##############################
+$data_json_file_path = "data.json";
+$config_json_file_path = "config.json";
+#######################################
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$json_data = file_get_contents('data.json');
+$json_data = file_get_contents($data_json_file_path);
 $data_data = json_decode($json_data, true);
-$json_config = file_get_contents('config.json');
+$json_config = file_get_contents($config_json_file_path);
 $data_config = json_decode($json_config,true);
 
 $statuses = array();

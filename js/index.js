@@ -1,5 +1,8 @@
+// CONFIG /////////////////////////
 const data_url = '/data.json';
 const config_url = '/config.json';
+///////////////////////////////////
+
 let json_data = [];
 let json_config = [];
 fetch(data_url).then(response => response.json()).then(data => {
@@ -14,10 +17,10 @@ fetch(config_url).then(response => response.json()).then(data => {
 
 function load(){
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
-        if(json_config['D' + i].mode == "OUTPUT"){
+        if(json_config['D' + i].mode == "0"){
             document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "')\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
         }
-        else if(json_config['D' + i].mode == "INPUT"){
+        else if(json_config['D' + i].mode == "1"){
             document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td>"
         }
         else{
@@ -27,7 +30,7 @@ function load(){
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
         document.getElementById("description_d" + i).innerHTML = json_config['D' + i].description;
         document.getElementById("mode_d" + i).innerHTML = json_config['D' + i].mode;
-        if(json_config['D' + i].mode == "OUTPUT"){
+        if(json_config['D' + i].mode == "0"){
             document.getElementById("button_duration_d" + i).value = json_config['D' + i].duration;
             if(json_data.target['D' + i] == -1){
                 document.getElementById("duration_d" + i).innerHTML = "∞";
@@ -54,7 +57,7 @@ function load(){
                 document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
             }
         }
-        else if(json_config['D' + i].mode == "INPUT"){
+        else if(json_config['D' + i].mode == "1"){
             document.getElementById("target_d" + i).innerHTML = json_data.status['D' + i];
         }
     }
