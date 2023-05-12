@@ -36,7 +36,7 @@ foreach ($statuses as $var) {
 }
 foreach ($targets as $var) {
     if ($data_data['target'][$var] > 0) {
-        $$var = 0;
+        $$var = '0';
     } else {
         $$var = $data_data['target'][$var];
     }
