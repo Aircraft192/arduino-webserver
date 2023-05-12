@@ -16,6 +16,10 @@ $data_config = json_decode($json_config,true);
 
 $statuses = array();
 $statuses = array_keys($data_config);
+$targets = array();
+$targets = array_keys($data_config);
+
+print_r($json_data);
 
 foreach ($statuses as $var) {
     if (isset($_GET[$var]) && $_GET[$var] >= 0) {
@@ -30,12 +34,18 @@ foreach ($statuses as $var) {
     }
     $status[$var] = $$var;
 }
+foreach ($targets as $var) {
+    if ($data_data['target'][$var] > 0) {
+        $$var = 0;
+    } else {
+        $$var = $data_data['target'][$var];
+    }
+    $target[$var] = $$var;
+}
 $data_data = array(
     'status' => $status,
-    'target' => $data_data['target'],
+    'target' => $target,
 );
 $json_encoded = json_encode($data_data);
 file_put_contents('data.json', $json_encoded);
-
-print_r($json_encoded);
 ?>

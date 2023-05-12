@@ -5,6 +5,10 @@ const config_url = '/config.json';
 
 let json_data = [];
 let json_config = [];
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let r = urlParams.get('r');
+
 fetch(data_url).then(response => response.json()).then(data => {
     json_data = data;
 })
@@ -71,6 +75,9 @@ function load(){
         document.getElementsByTagName("form")[i].addEventListener('submit', handleForm);
         
     }
+    if(r > 0){
+        setTimeout(() => {window.location.href = '/';}, r*1000);
+    }
 }
 function handleForm(event) { 
     event.preventDefault(); 
@@ -87,7 +94,7 @@ function press(pin){
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Request failed', error));
-    setTimeout(() => {window.location.reload(true);}, 500);
+    setTimeout(() => {window.location.href = '/?r=6';}, 500);
 }
 function schalter(pin){
     let newStatus;
@@ -103,5 +110,5 @@ function schalter(pin){
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Request failed', error));
-    setTimeout(() => {window.location.reload(true);}, 500);
+    setTimeout(() => {window.location.href = '/';}, 500);
 }
