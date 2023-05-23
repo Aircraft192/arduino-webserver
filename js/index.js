@@ -22,7 +22,6 @@ fetch(config_url).then(response => response.json()).then(data => {
 function load(){
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
         if(i != 4){
-                console.log(i);
             if(json_config['D' + i].mode == "0" && i != 4){
                 document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\" onload=\"\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
             }
@@ -63,10 +62,18 @@ function load(){
                     document.getElementById("table_cell_press_d" + i).style.fontStyle = "italic";
                     document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
                 }
-                setTimeout(() => {document.getElementById('button_duration_d' + i).value = json_config['D' + i].duration;document.getElementById('button_duration_d' + i).nextElementSibling.innerHTML = document.getElementById('button_duration_d' + i).value}, 30);
-            }
+                if (document.getElementById("button_duration_d" + i) != null) {
+                    setTimeout(() => {document.getElementById('button_duration_d' + i).value = json_config['D' + i].duration;document.getElementById('button_duration_d' + i).nextElementSibling.innerHTML = document.getElementById('button_duration_d' + i).value}, 30);
+                }
+                }
             else if(json_config['D' + i].mode == "1"){
-                document.getElementById("target_d" + i).innerHTML = json_data.status['D' + i];
+                if(json_data.status['D' + i] == "0"){
+                    document.getElementById("target_d" + i).innerHTML = "Ausgeschaltet";
+                    document.getElementById("target_d" + i).style.color = "red";
+                } else {
+                    document.getElementById("target_d" + i).innerHTML = "Eingeschaltet";
+                    document.getElementById("target_d" + i).style.color = "green";
+                }
             }
         }
     }
@@ -77,7 +84,6 @@ function load(){
     if(r > 0){
         setTimeout(() => {window.location.href = '/';}, 5500);
     }
-    frameRate(2);
 }
 function handleForm(event) { 
     event.preventDefault(); 

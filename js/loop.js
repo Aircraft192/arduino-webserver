@@ -1,5 +1,5 @@
 function setup() {
-    frameRate(0);
+    frameRate(2);
 }
 function draw(){
     fetch(data_url, {cache: "no-store"}).then(response => response.json()).then(data => {
@@ -44,7 +44,13 @@ function draw(){
                 }
             }
             else if(json_config['D' + i].mode == "1"){
-                document.getElementById("target_d" + i).innerHTML = json_data.status['D' + i];
+                if(json_data.status['D' + i] == "0"){
+                    document.getElementById("target_d" + i).innerHTML = "Ausgeschaltet";
+                    document.getElementById("target_d" + i).style.color = "red";
+                } else {
+                    document.getElementById("target_d" + i).innerHTML = "Eingeschaltet";
+                    document.getElementById("target_d" + i).style.color = "green";
+                }
             }
         }
     }
