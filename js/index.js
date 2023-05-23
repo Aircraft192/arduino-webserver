@@ -24,10 +24,10 @@ function load(){
         if(i != 4){
                 console.log(i);
             if(json_config['D' + i].mode == "0" && i != 4){
-                document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\" onload=\"\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
+                document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\" onload=\"\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
             }
             else if(json_config['D' + i].mode == "1" && i != 4){
-                document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td>"
+                document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"target_d" + i +"\"></td>"
             }
             else{
                 if(i != 4){
@@ -38,7 +38,6 @@ function load(){
                 }
             }
             document.getElementById("description_d" + i).innerHTML = json_config['D' + i].description;
-            document.getElementById("mode_d" + i).innerHTML = json_config['D' + i].mode;
             if(json_config['D' + i].mode == "0"){
                 if(json_data.target['D' + i] == -1){
                     document.getElementById("duration_d" + i).innerHTML = "∞";
