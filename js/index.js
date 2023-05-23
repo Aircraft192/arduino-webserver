@@ -9,13 +9,13 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 let r = urlParams.get('r');
 
-fetch(data_url).then(response => response.json()).then(data => {
+fetch(data_url, {cache: "no-store"}).then(response => response.json()).then(data => {
     json_data = data;
 })
 .catch(error => console.error(error));
 fetch(config_url).then(response => response.json()).then(data => {
     json_config = data;
-    setTimeout(load, 50);
+    setTimeout(load, 200);
 })
 .catch(error => console.error(error));
 
@@ -24,7 +24,7 @@ function load(){
         if(i != 4){
                 console.log(i);
             if(json_config['D' + i].mode == "0" && i != 4){
-                document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "')\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\" onload=\"\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
+                document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\" onload=\"\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\"></td></tr>";   
             }
             else if(json_config['D' + i].mode == "1" && i != 4){
                 document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"mode_d" + i +"\"></td><td id=\"target_d" + i +"\"></td>"
@@ -78,6 +78,7 @@ function load(){
     if(r > 0){
         setTimeout(() => {window.location.href = '/';}, 5500);
     }
+    frameRate(2);
 }
 function handleForm(event) { 
     event.preventDefault(); 
@@ -89,13 +90,12 @@ function press(pin){
         newStatus = document.getElementById("button_duration_" + pin.toLowerCase()).value;
     }
     console.log('/setstatus.php/?' + pin + "=" + newStatus);
-    document.getElementsByTagName("body")[0].innerHTML = "<h1>Bitte warten...</h1>";
     fetch('/setstatus.php/?' + pin + "=" + newStatus)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Request failed', error));
-    setTimeout(() => {window.location.href = '/?r=1';}, 500);
 }
+
 function schalter(pin){
     let newStatus;
     if(json_data.target[pin] == 0){
@@ -105,10 +105,8 @@ function schalter(pin){
         newStatus = 0;
     }
     console.log('/setstatus.php/?' + pin + "=" + newStatus);
-    document.getElementsByTagName("body")[0].innerHTML = "<h1>Bitte warten...</h1>";
     fetch('/setstatus.php/?' + pin + "=" + newStatus)
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Request failed', error));
-    setTimeout(() => {window.location.href = '/';}, 500);
 }

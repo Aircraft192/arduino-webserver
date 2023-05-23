@@ -6,3 +6,8 @@ let plural = function(number, unit, extension){
         return number + " " + unit + extension.toLowerCase();
     }
 }
+let zeroBeforeSingleDigit = function(number){
+    if(number < 10){
+        return "0" + number;
+    }
+}
