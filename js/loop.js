@@ -16,7 +16,7 @@ function draw(){
                 else if(json_data.target['D' + i] == 0){
                     document.getElementById("duration_d" + i).innerHTML = "-";
                     if (document.getElementById("button_duration_d" + i) == null) {
-                        document.getElementById("table_cell_press_d" + i).innerHTML = "<form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form>";
+                        document.getElementById("table_cell_press_d" + i).innerHTML = "<form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\"> <span>01</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\"></form>";
                         document.getElementById('button_duration_d' + i).value = json_config['D' + i].duration;
                         document.getElementById('button_duration_d' + i).nextElementSibling.innerHTML = document.getElementById('button_duration_d' + i).value;
                         

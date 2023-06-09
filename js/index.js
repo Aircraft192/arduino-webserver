@@ -23,10 +23,38 @@ function load(){
     for (let i = 2; i <= Object.keys(json_config).length + 1; i++) {
         if(i != 4){
             if(json_config['D' + i].mode == "0" && i != 4){
-                document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"target_d" + i +"\"></td><td id=\"duration_d" + i +"\"></td><td id=\"table_cell_press_d" + i + "\"><form onsubmit=\"press('D" + i + "');return false\"><input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = this.value\" onload=\"\"> <span>1</span> <input type=\"submit\" value=\"Einschalten\" label=\"duration\" class=\"button\"></form></td><td><input type=\"button\" onclick='schalter(\"D" + i + "\")' id=\"switch_d" + i +"\" class=\"button\"></td></tr>";   
+                document.getElementById("output_table").innerHTML = document.getElementById("output_table").innerHTML + "<div>\
+                <h3 id=\"pin_d" + i +"\">D" + i +"</h3>\
+                <hr>\
+                <span id=\"description_d" + i +"\"></span>\
+                <hr>\
+                <span id=\"target_d" + i +"\"></span>\
+                <br>\
+                <span id=\"duration_d" + i +"\"></span>\
+                <hr>\
+                <span id=\"table_cell_press_d" + i +"\">\
+                    <form onsubmit=\"press(\'D" + i +"\');return false\">\
+                        <input type=\"range\" min=\"1\" max=\"10\" step=\"1\" value=\"1\" id=\"button_duration_d" + i +"\" oninput=\"this.nextElementSibling.innerHTML = zeroBeforeSingleDigit(this.value)\">\
+                        <span>01</span><br>\
+                        <input type=\"submit\" value=\"Einschalten\" label=\"duration\" class=\"button\">\
+                    </form>\
+                </span>\
+                <hr>\
+                <span>\
+                    <form>\
+                        <input type=\"submit\" value=\"Einschalten\" onclick=\'schalter(\"D" + i +"\")\' id=\"switch_d" + i +"\" class=\"button\">\
+                    </form>\
+                </span>\
+            </div>"
             }
             else if(json_config['D' + i].mode == "1" && i != 4){
-                document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<tr><td>D" + i +"</td><td id=\"description_d" + i +"\"></td><td id=\"target_d" + i +"\"></td>"
+                document.getElementById("input_table").innerHTML = document.getElementById("output_table").innerHTML + "<div>\
+                <h3 id=\"pin_d" + i +"\">D" + i +"</h3>\
+                <hr>\
+                <span id=\"description_d" + i +"\"></span>\
+                <hr>\
+                <span id=\"target_d" + i +"\"></span>\
+                </div>"
             }
             else{
                 if(i != 4){
