@@ -1,9 +1,9 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 table, th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 th, td{
     padding: 5px;
@@ -28,6 +28,7 @@ form{
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: pre;
+  margin-bottom: 0.5em;
 }
 
 .button:hover {
@@ -40,21 +41,32 @@ form{
   border-color: #4285f4;
   outline: none;
 }
-
 .flex-container {
   display: flex;
   flex-wrap: wrap;
 }
 
-.flex-container-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-container-row > div {
-  margin: 0 4 0 4;
-}
-
 .flex-container > div {
   margin: 0 4 0 4;
+  padding: 0 4 0 4;
+  border: 2px solid black;
+  border-radius: 0.5em;
+  flex-basis: 100%;
+  max-width: 25em;
+  margin-bottom: 1em;
+}
+
+h3, span{
+  text-align: center;
+}
+
+hr{
+  border-color: black;
+  border-style: solid;
+}
+
+@media only screen and (max-width: 870px){
+  .flex-container > div {
+    max-width: 50em;
+  }
 }
