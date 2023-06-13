@@ -42,13 +42,13 @@ function load(){
                 <hr>\
                 <span>\
                     <form>\
-                        <input type=\"submit\" value=\"Einschalten\" onclick=\'schalter(\"D" + i +"\")\' id=\"switch_d" + i +"\" class=\"button\">\
+                        <input type=\"submit\" value=\"Einschalten\" onclick=\"schalter(\'D" + i +"\')\" id=\"switch_d" + i +"\" class=\"button\">\
                     </form>\
                 </span>\
             </div>"
             }
             else if(json_config['D' + i].mode == "1" && i != 4){
-                document.getElementById("input_table").innerHTML = document.getElementById("output_table").innerHTML + "<div>\
+                document.getElementById("input_table").innerHTML = document.getElementById("input_table").innerHTML + "<div>\
                 <h3 id=\"pin_d" + i +"\">D" + i +"</h3>\
                 <hr>\
                 <span id=\"description_d" + i +"\"></span>\
@@ -91,7 +91,7 @@ function load(){
                     document.getElementById("table_cell_press_d" + i).style.color = "#4f4f4f";
                 }
                 if (document.getElementById("button_duration_d" + i) != null) {
-                    setTimeout(() => {document.getElementById('button_duration_d' + i).value = json_config['D' + i].duration;document.getElementById('button_duration_d' + i).nextElementSibling.innerHTML = document.getElementById('button_duration_d' + i).value}, 30);
+                    setTimeout(() => {document.getElementById('button_duration_d' + i).value = zeroBeforeSingleDigit(json_config['D' + i].duration);document.getElementById('button_duration_d' + i).nextElementSibling.innerHTML = zeroBeforeSingleDigit(document.getElementById('button_duration_d' + i).value)}, 30);
                 }
                 }
             else if(json_config['D' + i].mode == "1"){

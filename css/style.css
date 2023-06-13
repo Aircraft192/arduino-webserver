@@ -11,7 +11,7 @@ th, td{
 form{
     margin-block-end: 0em;
 }
-.button {
+input[type="submit" i] {
   background-color: #f8f9fa;
   border: 1px solid #f8f9fa;
   border-radius: 4px;
@@ -31,13 +31,13 @@ form{
   margin-bottom: 0.5em;
 }
 
-.button:hover {
+input[type="submit" i]:hover {
   border-color: #dadce0;
   box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
   color: #202124;
 }
 
-.button:focus {
+input[type="submit" i]:focus {
   border-color: #4285f4;
   outline: none;
 }
