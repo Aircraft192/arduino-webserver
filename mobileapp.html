@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="js/lib.js"></script>
+
+    <script>
+        function load() {
+            let adress = getCookie('adress');
+            if(adress != undefined){
+                document.location.href = "https://" + adress;
+            }
+        }
+
+        function redirect() {
+            if(httpGet("https://" + document.getElementById('adress').value).split("\n")[0] == "<!ARDUINO_SMARTHOME_MOBILEAPP>"){
+                expire = new Date;
+                expire.setFullYear(expire.getFullYear() + 1);
+
+                document.cookie = "adress=" + document.getElementById('adress').value + "; expires=" + expire;
+                document.location.href = "https://" + document.getElementById('adress').value;
+            }
+        }
+    </script>
+    <style>
+        table {
+            height: 100%;
+        }
+        input[type="text" i] {
+            width: 98%;
+            font-size: 2.85em;
+            text-align: center;
+
+            border: 1px solid black;
+            border-radius: 0px;
+
+            background-color: #f8f9fa;
+        }
+        input[type="text" i]:focus{
+            outline: none;
+        }
+        div {
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body onload="load()">
+    <h1>Konfiguration</h1>
+    <p>IP-Adresse oder Domain:</p>
+    <div>
+        <form onsubmit="redirect();return false;">
+            <input type="text" id="adress" placeholder="aircraft192.ml">
+            <br><br>
+            <input type="submit" value="Bestätigen">
+        </form>
+    </div>
+</body>
+</html>
