@@ -1,5 +1,6 @@
 body{
   font-family: Arial, Helvetica, sans-serif;
+  user-select: none;
 }
 table, th, td{
   border: 1px solid black;
@@ -11,7 +12,7 @@ th, td{
 form{
     margin-block-end: 0em;
 }
-.button {
+input[type="submit" i] {
   background-color: #f8f9fa;
   border: 1px solid #f8f9fa;
   border-radius: 4px;
@@ -31,13 +32,13 @@ form{
   margin-bottom: 0.5em;
 }
 
-.button:hover {
+input[type="submit" i]:hover {
   border-color: #dadce0;
   box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
   color: #202124;
 }
 
-.button:focus {
+input[type="submit" i]:focus {
   border-color: #4285f4;
   outline: none;
 }
@@ -55,6 +56,12 @@ form{
   max-width: 25em;
   margin-bottom: 1em;
 }
+.output{
+  background: linear-gradient(120deg, #00c402, #00cdd6);
+}
+.input{
+  background: linear-gradient(120deg, #e1aa13, #ff3e3e);
+}
 
 h3, span{
   text-align: center;
@@ -69,4 +76,20 @@ hr{
   .flex-container > div {
     max-width: 50em;
   }
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: #323232;
+		color: #e7e7e7;
+	}
+  .flex-container > div {
+    color: black;
+  }
+}
+
+@media print {
+   .flex-container > div {
+    max-width: 100%;
+   }
 }
