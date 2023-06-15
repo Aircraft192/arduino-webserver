@@ -48,8 +48,8 @@ input[type="submit" i]:focus {
 }
 
 .flex-container > div {
-  margin: 0 4 0 4;
-  padding: 0 4 0 4;
+  margin: 0px 4px 0px 4px;
+  padding: 0px 4px 0px 4px;
   border: 2px solid black;
   border-radius: 0.5em;
   flex-basis: 100%;
